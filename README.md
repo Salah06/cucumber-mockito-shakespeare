@@ -66,15 +66,14 @@ Dans le POM, on charge Junit, cucumber4java et le lien entre les deux. That’s 
     <version>1.0-SNAPSHOT</version>
     <dependencies>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>1.2.2</version>
-            <scope>test</scope>
+            <version>4.8.0</version>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>1.2.2</version>
+            <version>4.8.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -143,7 +142,7 @@ Donc, on spécifie notre système comme suit:
     Scenario: Creating an empty order
       Given Romeo who wants to buy a drink
       When  an order is declared for Juliette
-      Then  there is no cocktail in the order
+      Then  there is 0 cocktail in the order
 
 On lance le test. Junit rale, normal, il ne sait pas quoi faire de notre spec.
 
@@ -175,7 +174,7 @@ public class CocktailStepDefinitions {
 		order.declareTarget("Juliette");
 	}
 
-	@Then("^there is 0 cocktails in the order$")
+	@Then("^there is 0 cocktail in the order$")
 	public void there_is_no_cocktail_in_the_order() {
 		List<String> cocktails =  order.getCocktails();
 		assertEquals(0, cocktails.size());
@@ -250,7 +249,7 @@ Donc, on va définir des expressions rationnelles dans nos annotations, et Cucum
 		order.declareTarget(juliette);
 	}
 
-	@Then("^there is (\\d+) cocktails in the order$")
+	@Then("^there is (\\d+) cocktail in the order$")
 	public void there_is_n_cocktails_in_the_order(int n) {
 		List<String> cocktails =  order.getCocktails();
 		assertEquals(n, cocktails.size());
